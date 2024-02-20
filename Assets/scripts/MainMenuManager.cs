@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 public class MainMenuManager : MonoBehaviour
 {
-    private Scene currentScene;
+    private int sceneIndex;
 
     [SerializeField] private string MainGameSceneName;
 
@@ -24,6 +24,7 @@ public class MainMenuManager : MonoBehaviour
         QuitBtn = GameObject.FindWithTag("QuitBtn").GetComponent<Button>();
 
         ListButtons = new[] {PlayBtn, OptionsBtn, QuitBtn };
+        sceneIndex = SceneManager.GetActiveScene().buildIndex;
     }
 
     // Start is called before the first frame update
@@ -37,15 +38,11 @@ public class MainMenuManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        for (int i = 0; i < ListButtons.Length; i++)
-        {
-            Debug.Log(ListButtons[i].name);
-        }
     }
 
     public void Play()
     {
-
+        SceneManager.LoadScene(sceneIndex + 1);
     }
 
     public void OpenOptions()
