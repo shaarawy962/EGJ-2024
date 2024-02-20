@@ -182,6 +182,10 @@ PrefabInstance:
       propertyPath: m_ChildForceExpandHeight
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2491593810403538163, guid: 907e640631483e842aed3d48b87de70b, type: 3}
+      propertyPath: m_fontColor32.rgba
+      value: 16777215
+      objectReference: {fileID: 0}
     - target: {fileID: 2491593811023384658, guid: 907e640631483e842aed3d48b87de70b, type: 3}
       propertyPath: m_Name
       value: MainUI
@@ -429,6 +433,10 @@ MonoBehaviour:
   HorizontalBox: {fileID: 876453386}
   CharacterEntry: {fileID: 6742325851556457069, guid: 316f828f4ce0aba46a51992257a2624b, type: 3}
   DummyCharacterCount: 2
+  WaveTimeline: {fileID: 1703355963}
+  isTimerOn: 1
+  WaveTimeRemaining: 500
+  WaveIndex: 1
 --- !u!4 &1566005927
 Transform:
   m_ObjectHideFlags: 0
@@ -444,6 +452,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!320 &1703355963 stripped
+PlayableDirector:
+  m_CorrespondingSourceObject: {fileID: 6744589134535994782, guid: 907e640631483e842aed3d48b87de70b, type: 3}
+  m_PrefabInstance: {fileID: 876453384}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2049163337
 GameObject:
   m_ObjectHideFlags: 0

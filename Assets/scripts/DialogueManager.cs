@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class DialogueManager : MonoBehaviour
 {
@@ -80,6 +81,7 @@ public class DialogueManager : MonoBehaviour
         // You can add any logic here for ending the dialogue, e.g., closing the dialogue box, ending the scene, etc.
         Debug.Log("End of dialogue");
         dialogueText.gameObject.SetActive(false);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
 
     }
 }
