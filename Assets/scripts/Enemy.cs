@@ -1,43 +1,35 @@
 using System;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Enemy : MonoBehaviour
 {
     // Stats
-    public int health;
+    public float maxHealth;
     public float movementSpeed;
-    public bool defeated;
     public float threshold;
     public float runAwayMultiplier;
-    public bool passedThreshold = false;
+
+    private bool defeated = false;
+    private bool passedThreshold = false;
+    private float health;
+    private FloatingHealthBar healthBar;
 
     [SerializeField] GameObject target;
 
-    // Start is called before the first frame update
-    void Start()
+    private void Awake()
     {
-
+        health = maxHealth;
+        healthBar = GetComponentInChildren<FloatingHealthBar>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        // --------------------------------------
-        // Debugging threshold line and Flee line
-        float fleeThreshold = threshold - 3;
+        // Debugging threshold line
         Debug.DrawLine(new Vector2(threshold, -1000), new Vector2(threshold, 1000), Color.red, 2.5f);
-        Debug.DrawLine(new Vector2(fleeThreshold, -1000), new Vector2(fleeThreshold, 1000), Color.yellow, 2.5f);
 
-        // Testing defeated state
-        Debug.Log(String.Format("{0}, defeated: {1}", name, defeated));
-        Debug.Log(String.Format("health {0}", health));
-        if (transform.position.x <= fleeThreshold)
-        {
-            health = 0;
-        }
-        // --------------------------------------
-
-        if (health == 0 && defeated == false)
+        if (health <= 0 && defeated == false)
         {
             defeated = true;
             transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
@@ -70,6 +62,17 @@ public class Enemy : MonoBehaviour
 
     public void Flee()
     {
+        health = 0;
+    }
 
+    void OnBecameInvisible()
+    {
+        Destroy(gameObject, 1.0f);
+    }
+
+    public void TakeDamage(float amount)
+    {
+        health -= amount;
+        healthBar.UpdateHealthBar(health, maxHealth);
     }
 }
