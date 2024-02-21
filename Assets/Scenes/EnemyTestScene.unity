@@ -311,6 +311,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1938966575}
     - target: {fileID: 5608792783760836540, guid: 32b0d6f19454d424f8dbbd50a60f6b2f, type: 3}
+      propertyPath: maxHealth
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 5608792783760836540, guid: 32b0d6f19454d424f8dbbd50a60f6b2f, type: 3}
       propertyPath: movementSpeed
       value: 1
       objectReference: {fileID: 0}
@@ -403,6 +407,10 @@ PrefabInstance:
       propertyPath: target
       value: 
       objectReference: {fileID: 1938966575}
+    - target: {fileID: 5608792783760836540, guid: 32b0d6f19454d424f8dbbd50a60f6b2f, type: 3}
+      propertyPath: maxHealth
+      value: 50
+      objectReference: {fileID: 0}
     - target: {fileID: 5608792783760836540, guid: 32b0d6f19454d424f8dbbd50a60f6b2f, type: 3}
       propertyPath: movementSpeed
       value: 1
@@ -511,7 +519,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4700806999379224850, guid: 32b0d6f19454d424f8dbbd50a60f6b2f, type: 3}
       propertyPath: offset.y
-      value: 0
+      value: 0.8
       objectReference: {fileID: 0}
     - target: {fileID: 5608792783760836537, guid: 32b0d6f19454d424f8dbbd50a60f6b2f, type: 3}
       propertyPath: m_RootOrder
@@ -655,6 +663,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1938966575}
     - target: {fileID: 5608792783760836540, guid: 32b0d6f19454d424f8dbbd50a60f6b2f, type: 3}
+      propertyPath: maxHealth
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 5608792783760836540, guid: 32b0d6f19454d424f8dbbd50a60f6b2f, type: 3}
       propertyPath: movementSpeed
       value: 1
       objectReference: {fileID: 0}
@@ -747,6 +759,10 @@ PrefabInstance:
       propertyPath: target
       value: 
       objectReference: {fileID: 1938966575}
+    - target: {fileID: 5608792783760836540, guid: 32b0d6f19454d424f8dbbd50a60f6b2f, type: 3}
+      propertyPath: maxHealth
+      value: 1000
+      objectReference: {fileID: 0}
     - target: {fileID: 5608792783760836540, guid: 32b0d6f19454d424f8dbbd50a60f6b2f, type: 3}
       propertyPath: movementSpeed
       value: 0.1
