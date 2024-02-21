@@ -9,6 +9,7 @@ public class GetMouseInput : MonoBehaviour
     private Camera _camera;
     [SerializeField] private LayerMask characterMask;
     [SerializeField] private LayerMask groundMask;
+    [SerializeField] private CharacterManager manager;
     private void Start()
     {
         _camera = Camera.main;
@@ -22,7 +23,7 @@ public class GetMouseInput : MonoBehaviour
            if (hit.collider is null)
                return;
             Debug.Log(hit.collider.name);
-            CharacterManager.SelectCharacter(hit.collider.gameObject);
+            manager.SelectCharacter(hit.collider.gameObject);
         }
         else if (Input.GetMouseButtonDown(1))
         {
@@ -32,7 +33,7 @@ public class GetMouseInput : MonoBehaviour
                 return;
             var target = _camera.ScreenToWorldPoint(Input.mousePosition);
             target.z = hit.collider.transform.position.z;
-            CharacterManager.ChangeTarget(target);
+            manager.ChangeTarget(target , 0.01f);
         }
     }
     
