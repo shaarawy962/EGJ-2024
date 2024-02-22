@@ -15,38 +15,75 @@ public class CharacterSetUp : MonoBehaviour
    
     
     [Header("Movement Info")]
-    public float speed = 50f;
+    [SerializeField] float speed = 50f;
     [HideInInspector] public Vector3 target;
     [HideInInspector] public float offset;
     
     [Header("Attack Info")]
     public float attackRange = 2f;
+
+    [HideInInspector] public Transform enemyTarget;
     [SerializeField] private LayerMask EnemyMask;
     [SerializeField] private Transform attackPoint;
     
-    private void Start()
+    private void Awake()
     {
         _animator = gameObject.GetComponent<Animator>();
         _state = States.Idle;
         target = transform.position;
+        enemyTarget = null;
         offset = .01f;
     }
-    private void Update()
+    private void FixedUpdate()
     {
-        if (Vector3.Distance(transform.position, target) < offset)
+        if (Vector3.Distance(transform.position, target) <= offset)
         {
             if (FindEnemy().Length > 0)
+            {
                 _state = States.Attack;
+               Attack();
+            }
             else
                 _state = States.Idle;
         }
-        else 
+        else
+        {
+            Movement(target);
             _state = States.Run;
+        }
         _animator.SetInteger("state" , (int) _state);
     }
     internal Collider2D[] FindEnemy()
     {
         return Physics2D.OverlapCircleAll(attackPoint.position, attackRange, EnemyMask);
+    }
+
+    private void Movement(Vector3 target)
+    {
+        transform.position = Vector3.MoveTowards(transform.position, target, speed * Time.deltaTime);
+        Direction(target);
+    }
+
+    private void Attack()
+    {
+        var enemies = FindEnemy();
+        var shortestdistance = Mathf.Infinity;
+        Collider2D shortestenemy = null;
+        foreach (var enemy in enemies)
+        {
+            if (Vector3.Distance(transform.position, enemy.transform.position) < shortestdistance)
+                shortestenemy = enemy;
+        }
+        
+        if (enemyTarget != null && Vector3.Distance(transform.position, enemyTarget.position) <= attackRange)
+            Direction(enemyTarget.position);
+        else
+        {
+            if (shortestenemy == null) 
+                return;
+            Direction(shortestenemy.transform.position);
+            enemyTarget = null;
+        }
     }
     internal void Direction(Vector3 target)
     {

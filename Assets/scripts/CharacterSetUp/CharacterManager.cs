@@ -16,8 +16,9 @@ public class CharacterManager : MonoBehaviour
         {
             if(selectedCharacter is null)
                 return;
-            var offset = _characterSetUp.attackRange;
+            var offset = _characterSetUp.attackRange/2;
             var target = character.transform.position;
+            _characterSetUp.enemyTarget = character.transform;
             ChangeTarget(target , offset);
             return;
         }
