@@ -1,15 +1,20 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 using TMPro;
 using UnityEngine.SceneManagement;
+using System;
 
 public class DialogueManager : MonoBehaviour
 {
     [SerializeField] private TMP_Text dialogueText;
+    [SerializeField] private Button nextButton;
     [SerializeField] private float typingSpeed = 0.1f;
     [SerializeField] private float sentenceTimeGap = 0.5f;
     [SerializeField] private string[] dialogueSentences;
     [SerializeField] private string[] dialogueHeaders;
+
+    public Action DialogueEnded;
 
     private int index = 0;
     private bool isDialogueFinished = false;
@@ -65,6 +70,7 @@ public class DialogueManager : MonoBehaviour
             yield return new WaitForSeconds(sentenceTimeGap);
         }
         isDialogueFinished = true;
+        DialogueEnded.Invoke();
     }
 
     IEnumerator TypeSentence(string sentence)
@@ -81,7 +87,12 @@ public class DialogueManager : MonoBehaviour
         // You can add any logic here for ending the dialogue, e.g., closing the dialogue box, ending the scene, etc.
         Debug.Log("End of dialogue");
         dialogueText.gameObject.SetActive(false);
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+
+    }
+
+    void OnNextButtonPressed()
+    {
 
     }
 }

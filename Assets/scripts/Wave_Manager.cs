@@ -20,24 +20,28 @@ public class Wave_Manager : MonoBehaviour
 
     public float WaveTimer = 0;
     public float IntervalTimer = 0;
+    private bool ShouldStartWaves = false;
 
     //responsible for wave and interval timers (can be disabled)
     //may change later
     void Update()
     {
-        IntervalTimer -= Time.deltaTime;
-        WaveTimer -= Time.deltaTime;
-
-        if (WaveTimer < 0)
+        if (ShouldStartWaves)
         {
-            WaveTimer = UnityEngine.Random.Range(WaveDelay.x, WaveDelay.y);
-            StartNextWave();
-        }
+            IntervalTimer -= Time.deltaTime;
+            WaveTimer -= Time.deltaTime;
 
-        if(IntervalTimer < 0 && CurrentWave != null)
-        {
-            IntervalTimer = UnityEngine.Random.Range(CurrentWave.IntervalDelay.x, CurrentWave.IntervalDelay.y);
-            StartNextInterval();
+            if (WaveTimer < 0)
+            {
+                WaveTimer = UnityEngine.Random.Range(WaveDelay.x, WaveDelay.y);
+                StartNextWave();
+            }
+
+            if (IntervalTimer < 0 && CurrentWave != null)
+            {
+                IntervalTimer = UnityEngine.Random.Range(CurrentWave.IntervalDelay.x, CurrentWave.IntervalDelay.y);
+                StartNextInterval();
+            }
         }
     }
 
@@ -92,6 +96,11 @@ public class Wave_Manager : MonoBehaviour
                 }
             }
         }
+    }
+
+    public void StartWaves()
+    {
+        ShouldStartWaves = true;
     }
 
 }

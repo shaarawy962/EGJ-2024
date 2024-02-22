@@ -6,6 +6,13 @@ public class CharacterManager : MonoBehaviour
 {
     private GameObject selectedCharacter;
     private CharacterSetUp _characterSetUp;
+
+    [SerializeField]
+    private CatCharacter catCharacter;
+
+    [SerializeField]
+    private HoundCharacter houndCharacter;
+        
     private void Start()
     {
         selectedCharacter = null;

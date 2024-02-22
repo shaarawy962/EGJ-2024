@@ -343,7 +343,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 100
-  movementSpeed: 100
+  movementSpeed: 2
   threshold: -5
   runAwayMultiplier: 5
   target: {fileID: 1598575639674989794, guid: 8d75a171a86e276449a1d34b8766f8fe, type: 3}
