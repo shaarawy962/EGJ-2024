@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1188640260930576764}
   - component: {fileID: 3824004711107466802}
   - component: {fileID: 4700806999379224850}
-  m_Layer: 5
+  m_Layer: 7
   m_Name: HealthBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -117,7 +117,7 @@ GameObject:
   - component: {fileID: 8617303230304100521}
   - component: {fileID: 3289914211014486199}
   - component: {fileID: 1201633105670011685}
-  m_Layer: 5
+  m_Layer: 7
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -215,7 +215,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3591669256214676001}
-  m_Layer: 5
+  m_Layer: 7
   m_Name: Fill Area
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -255,8 +255,8 @@ GameObject:
   - component: {fileID: 5608792783760836538}
   - component: {fileID: 5608792783760836540}
   - component: {fileID: 7804057049399249175}
-  m_Layer: 0
-  m_Name: Enemy
+  m_Layer: 7
+  m_Name: Snake
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -318,7 +318,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 2
   m_Sprite: {fileID: 21300000, guid: a1085b64f23d04442bffa01b23eaeadc, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -347,6 +347,7 @@ MonoBehaviour:
   threshold: -5
   runAwayMultiplier: 5
   target: {fileID: 1598575639674989794, guid: 8d75a171a86e276449a1d34b8766f8fe, type: 3}
+  type: 1
 --- !u!61 &7804057049399249175
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -357,7 +358,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -384,7 +385,7 @@ GameObject:
   - component: {fileID: 6782467124241131269}
   - component: {fileID: 6126977344214449244}
   - component: {fileID: 7779049541205950051}
-  m_Layer: 5
+  m_Layer: 7
   m_Name: Fill
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -460,7 +461,7 @@ GameObject:
   - component: {fileID: 1530311304250002454}
   - component: {fileID: 4467692752522209828}
   - component: {fileID: 4932473202342426650}
-  m_Layer: 5
+  m_Layer: 7
   m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -3,6 +3,12 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 
+public enum EnemyType
+{
+    Fox,
+    Snake
+}
+
 public class Enemy : MonoBehaviour
 {
     // Stats
@@ -19,8 +25,15 @@ public class Enemy : MonoBehaviour
     public bool Defeated => defeated;
     [SerializeField] GameObject target;
 
+
     //shady's code
     public Action<Enemy> GotDefeated;
+
+    [SerializeField]
+    EnemyType type;
+
+    public EnemyType EnemType => type;
+
 
     private void Awake()
     {

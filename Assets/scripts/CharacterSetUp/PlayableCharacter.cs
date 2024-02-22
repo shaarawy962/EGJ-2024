@@ -2,6 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+enum CharacterType
+{
+    Cat,
+    Hound
+}
 public class PlayableCharacter : MonoBehaviour
 {
     [Header("Character Health")]
@@ -34,6 +40,11 @@ public class PlayableCharacter : MonoBehaviour
 
     [SerializeField] private LayerMask EnemyMask;
 
+    [SerializeField]
+    CharacterType characterType;
+
+    [SerializeField]
+    EnemyType enemySpeciality;
 
     private void Awake()
     {
@@ -50,7 +61,8 @@ public class PlayableCharacter : MonoBehaviour
     {
         if (Vector3.Distance(transform.position, Target) <= Offset)
         {
-            if (FindEnemy().Length > 0)
+            var res = FindEnemy();
+            if (res.Length > 0)
             {
                 _state = States.Attack;
                 Attack();
@@ -96,8 +108,11 @@ public class PlayableCharacter : MonoBehaviour
                 shortestenemy = enemy;
             enemy.TryGetComponent(out Enemy enemy1);
 
-            if(!enemy1.Defeated)
-               enemy1.TakeDamage(100);
+            if (enemy1.EnemType == enemySpeciality)
+            {
+                if (!enemy1.Defeated)
+                    enemy1.TakeDamage(100);
+            }
         }
 
         if (enemyTarget != null && Vector3.Distance(transform.position, enemyTarget.position) <= attackRange)
@@ -107,8 +122,11 @@ public class PlayableCharacter : MonoBehaviour
             if (shortestenemy == null)
                 return;
             shortestenemy.TryGetComponent(out Enemy enemy1);
-            if (!enemy1.Defeated)
-                Direction(shortestenemy.transform.position);
+            if (enemy1.EnemType == enemySpeciality)
+            {
+                if (!enemy1.Defeated)
+                    Direction(shortestenemy.transform.position);
+            }
             enemyTarget = null;
         }
     }
