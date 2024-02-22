@@ -8,7 +8,7 @@ public class ShadyTimer
     public bool Loop;
     public bool IsFired = false;
 
-    private float TimeRemaining;
+    public float TimeRemaining;
 
     public ShadyTimer(float delay, bool loop )
     {

@@ -39,6 +39,7 @@ public class Enemy : MonoBehaviour
             defeated = true;
             transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
             movementSpeed *= runAwayMultiplier;
+
             //shady's code
             GotDefeated.Invoke(this);
         }
@@ -70,7 +71,6 @@ public class Enemy : MonoBehaviour
     public void Flee()
     {
         health = 0;
-        defeated = true;
     }
 
     void OnBecameInvisible()
@@ -81,8 +81,6 @@ public class Enemy : MonoBehaviour
     public void TakeDamage(float amount)
     {
         health -= amount;
-        if (health <= 0)
-            Flee();
         healthBar.UpdateHealthBar(health, maxHealth);
     }
 }

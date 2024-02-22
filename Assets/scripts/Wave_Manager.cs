@@ -24,22 +24,27 @@ public class Wave_Manager : MonoBehaviour
     public UnityEvent IntervalStarted;
 
     List<Enemy> SpawnedOnes = new List<Enemy>(10);
+    public bool Is_Waves_Runing;
 
     //responsible for wave and interval timers (can be disabled)
     //may change later
     void Update()
     {
-        WaveTimer.UpdateTimer(Time.deltaTime);
-        IntervalTimer.UpdateTimer(Time.deltaTime);
+        if (WaveTimer != null)
+            WaveTimer.UpdateTimer(Time.deltaTime);
+
+        if (IntervalTimer != null)
+            IntervalTimer.UpdateTimer(Time.deltaTime);
 
         if (SpawnedOnes.Count == 0)
         {
-            WaveEnded.Invoke();
-            if (LoadNextWave())
-            {
-                WaveTimer = new ShadyTimer(CurrentWave.WaveDelay, false);
-                WaveTimer.Event += StartWave;
-            }
+            if (Is_Waves_Runing)
+                if (LoadNextWave())
+                {
+                    WaveTimer = new ShadyTimer(CurrentWave.WaveDelay, false);
+                    WaveTimer.Event += StartWave;
+                }
+            WaveEnded?.Invoke();
         }
 
     }
@@ -63,7 +68,7 @@ public class Wave_Manager : MonoBehaviour
     public void StartWave()
     {
         LoadNextInterval();
-        WaveStarted.Invoke();
+        WaveStarted?.Invoke();
         StartInterval();
     }
 
@@ -89,7 +94,7 @@ public class Wave_Manager : MonoBehaviour
         StartCoroutine(SpawnEnemies());
         if (LoadNextInterval())
             IntervalTimer = new ShadyTimer(NextWaveInterval.IntervalDelay, false);
-        IntervalStarted.Invoke();
+        IntervalStarted?.Invoke();
     }
 
     public void EndWave()

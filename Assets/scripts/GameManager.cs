@@ -44,7 +44,6 @@ public class GameManager : MonoBehaviour
         if(CurrentGameMode == GameModes.Story)
         {
             uI_Manager.ToggleMainUi(true);
-            wave_Manager.StartWaves();
             CurrentGameMode = GameModes.Gameplay;
         }
     }
