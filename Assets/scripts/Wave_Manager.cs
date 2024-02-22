@@ -24,7 +24,7 @@ public class Wave_Manager : MonoBehaviour
     public UnityEvent IntervalStarted;
 
     List<Enemy> SpawnedOnes = new List<Enemy>(10);
-    public bool Is_Waves_Runing;
+    public bool Is_Waves_Runing = false;
 
     //responsible for wave and interval timers (can be disabled)
     //may change later

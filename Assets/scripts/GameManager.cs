@@ -11,6 +11,7 @@ enum GameModes
     Won,
     Paused
 }
+
 public class GameManager : MonoBehaviour
 {
     [SerializeField]
@@ -30,19 +31,20 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-            DialogueManager.DialogueEnded += OnDialogueEnded;
+        DialogueManager.DialogueEnded += OnDialogueEnded;
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     void OnDialogueEnded()
     {
-        if(CurrentGameMode == GameModes.Story)
+        if (CurrentGameMode == GameModes.Story)
         {
+            wave_Manager.Is_Waves_Runing = true;
             uI_Manager.ToggleMainUi(true);
             CurrentGameMode = GameModes.Gameplay;
         }
