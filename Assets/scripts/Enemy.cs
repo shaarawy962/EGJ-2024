@@ -16,6 +16,7 @@ public class Enemy : MonoBehaviour
     private float health;
     private FloatingHealthBar healthBar;
 
+    public bool Defeated => defeated;
     [SerializeField] GameObject target;
 
     //shady's code
@@ -69,6 +70,7 @@ public class Enemy : MonoBehaviour
     public void Flee()
     {
         health = 0;
+        defeated = true;
     }
 
     void OnBecameInvisible()
@@ -79,6 +81,8 @@ public class Enemy : MonoBehaviour
     public void TakeDamage(float amount)
     {
         health -= amount;
+        if (health <= 0)
+            Flee();
         healthBar.UpdateHealthBar(health, maxHealth);
     }
 }

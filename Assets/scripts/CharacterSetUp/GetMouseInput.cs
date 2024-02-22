@@ -33,7 +33,7 @@ public class GetMouseInput : MonoBehaviour
                 return;
             var target = _camera.ScreenToWorldPoint(Input.mousePosition);
             target.z = hit.collider.transform.position.z;
-            manager.ChangeTarget(target , 0.01f);
+            //manager.ChangeTarget(target , 0.01f);
         }
     }
     

@@ -20,12 +20,13 @@ namespace UI_Delegates
 
 public class UI_Manager : MonoBehaviour
 {
+    [SerializeField] private GameObject mainUi;
     [SerializeField] private TMP_Text WaveTimerText;
     [SerializeField] private TMP_Text WaveCountText;
     [SerializeField] private HorizontalLayoutGroup HorizontalBox;
     [SerializeField] private GameObject CharacterEntry;
     [SerializeField] private int DummyCharacterCount;
-    [SerializeField] private PlayableDirector WaveTimeline; 
+    [SerializeField] private PlayableDirector WaveTimeline;
     private List<GameObject> HorizontalBoxCharacterEntries;
 
 
@@ -40,7 +41,7 @@ public class UI_Manager : MonoBehaviour
 
 
     private int CharacterTypes;
-
+    
     public void SetCharacterTypes(int Count)
     {
         CharacterTypes = Count;
@@ -117,6 +118,7 @@ public class UI_Manager : MonoBehaviour
         SpawnEntries();
 
         Invoke("DebugMethod", 10);
+        ToggleMainUi(false);
     }
 
     // Update is called once per frame
@@ -150,6 +152,10 @@ public class UI_Manager : MonoBehaviour
         SetCharacterTypes(4);
         onWaveIndexChanged?.Invoke(4);
         onWaveTimerStarted?.Invoke(305);
+    }
+    public void ToggleMainUi(bool isOn)
+    {
+        this.mainUi.SetActive(isOn);
     }
 
 }
