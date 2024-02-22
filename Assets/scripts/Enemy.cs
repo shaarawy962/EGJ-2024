@@ -32,7 +32,9 @@ public class Enemy : MonoBehaviour
     void Update()
     {
         // Debugging threshold line
+#if UNITY_EDITOR
         Debug.DrawLine(new Vector2(threshold, -1000), new Vector2(threshold, 1000), Color.red, 2.5f);
+#endif
 
         if (health <= 0 && defeated == false)
         {
@@ -41,7 +43,7 @@ public class Enemy : MonoBehaviour
             movementSpeed *= runAwayMultiplier;
 
             //shady's code
-            GotDefeated.Invoke(this);
+            GotDefeated?.Invoke(this);
         }
 
         if (transform.position.x <= threshold)
@@ -81,6 +83,6 @@ public class Enemy : MonoBehaviour
     public void TakeDamage(float amount)
     {
         health -= amount;
-        healthBar.UpdateHealthBar(health, maxHealth);
+        healthBar?.UpdateHealthBar(health, maxHealth);
     }
 }
