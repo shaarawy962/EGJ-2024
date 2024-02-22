@@ -184,8 +184,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: GAME NAME
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 2422391fbafc8fa4da9608c19923306e, type: 2}
-  m_sharedMaterial: {fileID: 7089997796944138492, guid: 2422391fbafc8fa4da9608c19923306e, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 7da7f4788fba7f446ad5985c8dd2ba4b, type: 2}
+  m_sharedMaterial: {fileID: 2658185801516670549, guid: 7da7f4788fba7f446ad5985c8dd2ba4b, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -215,7 +215,7 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
@@ -653,8 +653,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: LOST & FOUND PRESENTS
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 2422391fbafc8fa4da9608c19923306e, type: 2}
-  m_sharedMaterial: {fileID: 7089997796944138492, guid: 2422391fbafc8fa4da9608c19923306e, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 7da7f4788fba7f446ad5985c8dd2ba4b, type: 2}
+  m_sharedMaterial: {fileID: 2658185801516670549, guid: 7da7f4788fba7f446ad5985c8dd2ba4b, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -678,13 +678,13 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 60
+  m_fontSizeBase: 60
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
@@ -749,6 +749,8 @@ PlayableDirector:
     value: {fileID: 246330303}
   - key: {fileID: 4119070383208538273, guid: 8aedb2cf8b9ecc844a0ced8770051b3c, type: 2}
     value: {fileID: 246330303}
+  - key: {fileID: 3288974927903486802, guid: 8aedb2cf8b9ecc844a0ced8770051b3c, type: 2}
+    value: {fileID: 0}
   m_ExposedReferences:
     m_References: []
 --- !u!95 &1637101040
