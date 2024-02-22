@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 
 public class Enemy : MonoBehaviour
@@ -16,6 +17,9 @@ public class Enemy : MonoBehaviour
     private FloatingHealthBar healthBar;
 
     [SerializeField] GameObject target;
+
+    //shady's code
+    public Action<Enemy> GotDefeated;
 
     private void Awake()
     {
@@ -34,6 +38,8 @@ public class Enemy : MonoBehaviour
             defeated = true;
             transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
             movementSpeed *= runAwayMultiplier;
+            //shady's code
+            GotDefeated.Invoke(this);
         }
 
         if (transform.position.x <= threshold)

@@ -1,19 +1,17 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "Wave", menuName = "Scriptable Objects/Wave Scriptable Object", order = 1)]
 public class Waves_Scriptable_Object : ScriptableObject
 {
-    [Tooltip("Min & max range for the interval delay.")]
-    public Vector2 IntervalDelay;
+    public float WaveDelay;
     public Wave_Interval[] Intervals;
 }
 
 [Serializable]
 public struct Wave_Interval : ICloneable
 {
+    public float IntervalDelay;
     public EnemyCount[] Enemies;
 
     public object Clone()
@@ -23,7 +21,7 @@ public struct Wave_Interval : ICloneable
         {
             enemies[i] = Enemies[i];
         }
-        Wave_Interval clone = new Wave_Interval() { Enemies = enemies };
+        Wave_Interval clone = new Wave_Interval() { Enemies = enemies, IntervalDelay = this.IntervalDelay };
         return clone;
     }
 }
