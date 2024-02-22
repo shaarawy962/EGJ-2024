@@ -4,12 +4,6 @@ using UnityEngine;
 
 public class PlayableCharacter : MonoBehaviour
 {
-    private Camera _camera;
-    [SerializeField] private LayerMask characterMask;
-    [SerializeField] private LayerMask groundMask;
-    [SerializeField] private CharacterManager manager;
-
-
     [Header("Character Health")]
     [SerializeField] private float hP = 100f;
 
@@ -20,55 +14,64 @@ public class PlayableCharacter : MonoBehaviour
 
 
     [Header("Movement Info")]
-    public float speed = 50f;
-    [HideInInspector] public Vector3 target;
-    [HideInInspector] public float offset;
+    [SerializeField] float speed = 50f;
+    [HideInInspector] public Vector3 Target;
+    [HideInInspector] public float Offset;
 
     [Header("Attack Info")]
     public float attackRange = 2f;
-    [SerializeField] private LayerMask EnemyMask;
+
+    [HideInInspector] public Transform enemyTarget;
+
     [SerializeField] private Transform attackPoint;
 
-    private void Start()
-    {
-        _camera = Camera.main;
 
+    [HideInInspector]
+    public CharacterManager manager;
+
+    [SerializeField] private LayerMask characterMask;
+    [SerializeField] private LayerMask groundMask;
+
+    [SerializeField] private LayerMask EnemyMask;
+
+
+    private void Awake()
+    {
         _animator = gameObject.GetComponent<Animator>();
         _state = States.Idle;
-        target = transform.position;
-        offset = .01f;
+        Target = transform.position;
+        enemyTarget = null;
+        Offset = .01f;
+        attackPoint = gameObject.transform;
     }
-    private void Update()
+
+   
+    private void FixedUpdate()
     {
-        if (Input.GetMouseButtonDown(0))
-        {
-            var ray = _camera.ScreenToWorldPoint(Input.mousePosition);
-            var hit = Physics2D.Raycast((Vector2)ray, Vector3.forward, 100, characterMask);
-            if (hit.collider is null)
-                return;
-            Debug.Log(hit.collider.name);
-            manager.SelectCharacter(hit.collider.gameObject);
-        }
-        else if (Input.GetMouseButtonDown(1))
-        {
-            var ray = _camera.ScreenToWorldPoint(Input.mousePosition);
-            var hit = Physics2D.Raycast((Vector2)ray, Vector3.forward, 100, groundMask);
-            if (hit.collider is null)
-                return;
-            var target = _camera.ScreenToWorldPoint(Input.mousePosition);
-            target.z = hit.collider.transform.position.z;
-            manager.ChangeTarget(target, 0.01f);
-        }
-        if (Vector3.Distance(transform.position, target) < offset)
+        if (Vector3.Distance(transform.position, Target) <= Offset)
         {
             if (FindEnemy().Length > 0)
+            {
                 _state = States.Attack;
+                Attack();
+            }
             else
                 _state = States.Idle;
         }
         else
+        {
+            Movement(Target);
             _state = States.Run;
+        }
         _animator.SetInteger("state", (int)_state);
+    }
+
+   
+
+    internal void ChangeTarget(Vector3 target, float offset)
+    {
+        Target = target;
+        Offset = offset;
     }
 
     internal Collider2D[] FindEnemy()
@@ -76,6 +79,39 @@ public class PlayableCharacter : MonoBehaviour
         return Physics2D.OverlapCircleAll(attackPoint.position, attackRange, EnemyMask);
     }
 
+    private void Movement(Vector3 target)
+    {
+        transform.position = Vector3.MoveTowards(transform.position, target, speed * Time.deltaTime);
+        Direction(target);
+    }
+
+    protected virtual void Attack() 
+    {
+        var enemies = FindEnemy();
+        var shortestdistance = Mathf.Infinity;
+        Collider2D shortestenemy = null;
+        foreach (var enemy in enemies)
+        {
+            if (Vector3.Distance(transform.position, enemy.transform.position) < shortestdistance)
+                shortestenemy = enemy;
+            enemy.TryGetComponent(out Enemy enemy1);
+
+            if(!enemy1.Defeated)
+               enemy1.TakeDamage(100);
+        }
+
+        if (enemyTarget != null && Vector3.Distance(transform.position, enemyTarget.position) <= attackRange)
+            Direction(enemyTarget.position);
+        else
+        {
+            if (shortestenemy == null)
+                return;
+            shortestenemy.TryGetComponent(out Enemy enemy1);
+            if (!enemy1.Defeated)
+                Direction(shortestenemy.transform.position);
+            enemyTarget = null;
+        }
+    }
     internal void Direction(Vector3 target)
     {
         if (target.x > transform.position.x)

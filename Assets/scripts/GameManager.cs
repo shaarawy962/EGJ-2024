@@ -25,7 +25,7 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     CharacterManager characterManager;
 
-    GameModes CurrentGameModes = GameModes.Story;
+    GameModes CurrentGameMode = GameModes.Story;
 
     // Start is called before the first frame update
     void Start()
@@ -41,10 +41,11 @@ public class GameManager : MonoBehaviour
 
     void OnDialogueEnded()
     {
-        if(CurrentGameModes == GameModes.Story)
+        if(CurrentGameMode == GameModes.Story)
         {
             uI_Manager.ToggleMainUi(true);
             wave_Manager.StartWaves();
+            CurrentGameMode = GameModes.Gameplay;
         }
     }
 }
