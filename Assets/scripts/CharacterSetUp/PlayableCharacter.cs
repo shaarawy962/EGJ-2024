@@ -46,6 +46,7 @@ public class PlayableCharacter : MonoBehaviour
     [SerializeField]
     EnemyType enemySpeciality;
 
+
     private void Awake()
     {
         _animator = gameObject.GetComponent<Animator>();
@@ -69,13 +70,15 @@ public class PlayableCharacter : MonoBehaviour
             }
             else
                 _state = States.Idle;
+            _animator.SetInteger("State", 0);
         }
         else
         {
             Movement(Target);
+            _animator.SetInteger("State", 1);
             _state = States.Run;
         }
-        _animator.SetInteger("state", (int)_state);
+        //_animator.SetInteger("state", (int)_state);
     }
 
    
@@ -112,6 +115,7 @@ public class PlayableCharacter : MonoBehaviour
             {
                 if (!enemy1.Defeated)
                     enemy1.TakeDamage(100);
+                _animator.SetTrigger("Attack");
             }
         }
 
