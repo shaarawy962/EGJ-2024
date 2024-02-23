@@ -20,7 +20,7 @@ public class MainMenuManager : MonoBehaviour
     private void Awake()
     {
         PlayBtn = GameObject.FindWithTag("PlayBtn").GetComponent<Button>();
-        OptionsBtn = GameObject.FindWithTag("OptionsBtn").GetComponent<Button>();
+        //OptionsBtn = GameObject.FindWithTag("OptionsBtn").GetComponent<Button>();
         QuitBtn = GameObject.FindWithTag("QuitBtn").GetComponent<Button>();
 
         ListButtons = new[] {PlayBtn, OptionsBtn, QuitBtn };
@@ -31,7 +31,6 @@ public class MainMenuManager : MonoBehaviour
     void Start()
     {
         PlayBtn.onClick.AddListener(Play);
-        OptionsBtn.onClick.AddListener(OpenOptions);
         QuitBtn.onClick.AddListener(Quit);
     }
 
@@ -42,7 +41,7 @@ public class MainMenuManager : MonoBehaviour
 
     public void Play()
     {
-        SceneManager.LoadScene(sceneIndex + 1);
+        //SceneManager.LoadScene(sceneIndex + 1);
     }
 
     public void OpenOptions()
@@ -52,6 +51,7 @@ public class MainMenuManager : MonoBehaviour
 
     public void Quit()
     {
+        Debug.Log("Quitting");
         Application.Quit();
     }
 }

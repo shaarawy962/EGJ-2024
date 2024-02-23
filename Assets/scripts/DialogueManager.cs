@@ -13,6 +13,10 @@ public class DialogueManager : MonoBehaviour
     [SerializeField] private float sentenceTimeGap = 0.5f;
     [SerializeField] private string[] dialogueSentences;
     [SerializeField] private string[] dialogueHeaders;
+    [SerializeField] private string MainMapSceneName;
+    [SerializeField] private int MainMapSceneBuildIndex;
+
+    bool bShouldSkip;
 
     public Action DialogueEnded;
 
@@ -22,6 +26,7 @@ public class DialogueManager : MonoBehaviour
     void Start()
     {
         //StartDialogue();
+        bShouldSkip = false;
     }
 
     public void StartDialogue()
@@ -37,9 +42,13 @@ public class DialogueManager : MonoBehaviour
         //{
         //    DisplayNextSentence();
         //}
+        if (Input.GetKeyDown(KeyCode.Space) && !bShouldSkip) {
+            bShouldSkip = true;
+        }
 
         if (isDialogueFinished)
         {
+
             EndDialogue();
             isDialogueFinished = false;
         }
@@ -67,6 +76,8 @@ public class DialogueManager : MonoBehaviour
             dialogueText.text = dialogueHeaders[i];
 
             yield return TypeSentence(sentence);
+            dialogueText.text = dialogueHeaders[i] + sentence;
+            bShouldSkip = false;
             yield return new WaitForSeconds(sentenceTimeGap);
         }
         isDialogueFinished = true;
@@ -78,7 +89,14 @@ public class DialogueManager : MonoBehaviour
         foreach (char letter in sentence)
         {
             dialogueText.text += letter;
-            yield return new WaitForSeconds(typingSpeed);
+            if (bShouldSkip)
+            {
+                yield break;
+            }
+            else
+            {
+                yield return new WaitForSeconds(typingSpeed);
+            }
         }
     }
 
@@ -88,6 +106,11 @@ public class DialogueManager : MonoBehaviour
         Debug.Log("End of dialogue");
         dialogueText.gameObject.SetActive(false);
         nextButton.gameObject.SetActive(false);
+        if (SceneManager.GetActiveScene().buildIndex == 0) {
+            //SceneManager.LoadScene(MainMapSceneBuildIndex);
+            SceneManager.LoadScene(MainMapSceneName);
+        }
+
         //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
 
     }
