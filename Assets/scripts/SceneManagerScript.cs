@@ -8,6 +8,7 @@ public class SceneManagerScript : MonoBehaviour
     private Scene currentScene;
 
     [SerializeField] private string[] SceneNames;
+    [SerializeField] private string DesiredSceneName;
 
     void Awake()
     {
@@ -24,6 +25,14 @@ public class SceneManagerScript : MonoBehaviour
     {
         SceneManager.LoadScene(SceneName);
     }
+
+    public void OpenScene(int sceneIndex)
+    {
+        SceneManager.LoadScene(sceneIndex);
+        if (Time.timeScale == 0.0f)
+            Time.timeScale = 1.0f;
+    }
+
 
     public void OpenNextScene()
     {
