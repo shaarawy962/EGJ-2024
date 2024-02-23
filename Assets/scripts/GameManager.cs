@@ -43,6 +43,15 @@ public class GameManager : MonoBehaviour
 
     }
 
+    public void LoseGame()
+    {
+        CurrentGameMode = GameModes.Lost;
+        if (uI_Manager != null)
+        {
+            uI_Manager.OnLostGame();
+        }
+    }
+
     void OnDialogueEnded()
     {
         if (CurrentGameMode == GameModes.Story)

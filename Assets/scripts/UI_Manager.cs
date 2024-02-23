@@ -28,6 +28,7 @@ public class UI_Manager : MonoBehaviour
     [SerializeField] private int DummyCharacterCount;
     [SerializeField] private PlayableDirector WaveTimeline;
     [SerializeField] private GameObject PauseScreen;
+    [SerializeField] private GameObject LostScreen;
     [SerializeField] private Button SettingsBtn;
     private List<GameObject> HorizontalBoxCharacterEntries;
     private GameObject spawnedPauseMenu;
@@ -78,6 +79,14 @@ public class UI_Manager : MonoBehaviour
             }
             Time.timeScale = 0.0f;
         }
+    }
+
+
+    public void OnLostGame()
+    {
+        if (LostScreen)
+            Instantiate(LostScreen);
+        Time.timeScale = 0.0f;
     }
 
     private void RefreshEntries()
