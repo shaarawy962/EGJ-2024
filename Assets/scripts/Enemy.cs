@@ -84,7 +84,6 @@ public class Enemy : MonoBehaviour
 
         float step = movementSpeed * Time.deltaTime;
         transform.position += direction * step;
-        transform.right += (transform.position - newTarget) * step;
     }
 
     public void Flee()

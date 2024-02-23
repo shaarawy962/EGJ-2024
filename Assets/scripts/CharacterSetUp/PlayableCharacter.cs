@@ -72,6 +72,8 @@ public class PlayableCharacter : MonoBehaviour
             }
             else
                 _state = States.Idle;
+
+            _animator.SetInteger("state", 0);
         }
         else
         {
@@ -113,7 +115,10 @@ public class PlayableCharacter : MonoBehaviour
             if (enemy1.EnemType == enemySpeciality)
             {
                 if (!enemy1.Defeated)
+                {
                     enemy1.TakeDamage(100);
+                    _animator.SetTrigger("Attack");
+                }
             }
         }
 
@@ -139,8 +144,8 @@ public class PlayableCharacter : MonoBehaviour
         else if (target.x < transform.position.x)
             transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles.x, 180, transform.rotation.eulerAngles.z);
     }
-    private void OnDrawGizmosSelected()
-    {
-        Gizmos.DrawWireSphere(attackPoint.position, attackRange);
-    }
+    // private void OnDrawGizmosSelected()
+    // {
+    //     Gizmos.DrawWireSphere(attackPoint.position, attackRange);
+    // }
 }

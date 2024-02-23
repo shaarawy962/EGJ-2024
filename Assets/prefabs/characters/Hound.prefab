@@ -146,7 +146,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hP: 100
-  speed: 20
+  speed: 5
   Target: {x: 0, y: 0, z: 0}
   Offset: 0
   attackRange: 2
@@ -164,3 +164,4 @@ MonoBehaviour:
     m_Bits: 128
   characterType: 1
   enemySpeciality: 0
+  dust: {fileID: 0}
