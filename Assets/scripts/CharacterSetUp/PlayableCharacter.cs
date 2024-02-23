@@ -72,14 +72,17 @@ public class PlayableCharacter : MonoBehaviour
             }
             else
                 _state = States.Idle;
+
+            _animator.SetInteger("State", 0);
         }
         else
         {
             Movement(Target);
             _state = States.Run;
+            _animator.SetInteger("State", 1);
             dust.Play();
         }
-        _animator.SetInteger("state", (int)_state);
+        
     }
     
     internal void ChangeTarget(Vector3 target, float offset)
@@ -113,7 +116,10 @@ public class PlayableCharacter : MonoBehaviour
             if (enemy1.EnemType == enemySpeciality)
             {
                 if (!enemy1.Defeated)
+                {
                     enemy1.TakeDamage(100);
+                    _animator.SetTrigger("Attack");
+                }
             }
         }
 
