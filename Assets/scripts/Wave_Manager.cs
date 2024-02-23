@@ -38,13 +38,13 @@ public class Wave_Manager : MonoBehaviour
 
         if (SpawnedOnes.Count == 0 && (CurrentWave is null || NextWaveIntervalIndex >= CurrentWave.Intervals.Length - 1))
         {
+            WaveEnded?.Invoke(WaveTimer.Delay);
             if (Is_Waves_Runing)
                 if (LoadNextWave())
                 {
                     WaveTimer = new ShadyTimer(CurrentWave.WaveDelay, false);
                     WaveTimer.Event += StartWave;
                 }
-            WaveEnded?.Invoke(WaveTimer.Delay);
         }
 
     }
