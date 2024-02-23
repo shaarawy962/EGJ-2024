@@ -27,7 +27,7 @@ public class ShadyTimer
         TimeRemaining -= deltatime;
         if (TimeRemaining <= 0)
         {
-            Event.Invoke();
+            Event?.Invoke();
             if (Loop)
                 TimeRemaining = Delay;
             else

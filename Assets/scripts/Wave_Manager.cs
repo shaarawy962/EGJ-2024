@@ -36,15 +36,15 @@ public class Wave_Manager : MonoBehaviour
         if (IntervalTimer != null)
             IntervalTimer.UpdateTimer(Time.deltaTime);
 
-        if (SpawnedOnes.Count == 0)
+        if (SpawnedOnes.Count == 0 && (CurrentWave is null || NextWaveIntervalIndex >= CurrentWave.Intervals.Length - 1))
         {
+            WaveEnded?.Invoke();
             if (Is_Waves_Runing)
                 if (LoadNextWave())
                 {
                     WaveTimer = new ShadyTimer(CurrentWave.WaveDelay, false);
                     WaveTimer.Event += StartWave;
                 }
-            WaveEnded?.Invoke();
         }
 
     }
@@ -93,16 +93,28 @@ public class Wave_Manager : MonoBehaviour
     {
         StartCoroutine(SpawnEnemies());
         if (LoadNextInterval())
+        {
             IntervalTimer = new ShadyTimer(NextWaveInterval.IntervalDelay, false);
+            IntervalTimer.Event += StartInterval;
+        }
         IntervalStarted?.Invoke();
     }
 
-    public void EndWave()
+    /// <summary>
+    /// Kills all spawned NPC's
+    /// </summary>
+    public void ClearScene()
     {
         for (int i = 0; i < SpawnedOnes.Count; i++)
         {
             SpawnedOnes[i].Flee();
         }
+    }
+
+    public void EndWave()
+    {
+        ClearScene();
+        NextWaveIntervalIndex = CurrentWave.Intervals.Length - 1;
     }
 
     //better implement a pool later
