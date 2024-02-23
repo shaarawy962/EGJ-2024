@@ -16,11 +16,13 @@ public class Enemy : MonoBehaviour
     public float movementSpeed;
     public float threshold;
     public float runAwayMultiplier;
+    public float knockbackForce;
 
     private bool defeated = false;
     private bool passedThreshold = false;
     private float health;
     private FloatingHealthBar healthBar;
+    private Rigidbody2D rb;
 
     public bool Defeated => defeated;
     [SerializeField] GameObject target;
@@ -39,6 +41,7 @@ public class Enemy : MonoBehaviour
     {
         health = maxHealth;
         healthBar = GetComponentInChildren<FloatingHealthBar>();
+        rb = GetComponent<Rigidbody2D>();
     }
 
     // Update is called once per frame
@@ -46,13 +49,13 @@ public class Enemy : MonoBehaviour
     {
         // Debugging threshold line
 #if UNITY_EDITOR
-        Debug.DrawLine(new Vector2(threshold, -1000), new Vector2(threshold, 1000), Color.red, 2.5f);
+        Debug.DrawLine(new(threshold, -1000), new(threshold, 1000), Color.red, 2.5f);
 #endif
 
         if (health <= 0 && defeated == false)
         {
             defeated = true;
-            transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
+            GetComponent<SpriteRenderer>().flipX = true;
             movementSpeed *= runAwayMultiplier;
 
             //shady's code
@@ -64,7 +67,7 @@ public class Enemy : MonoBehaviour
             passedThreshold = true;
         }
 
-        Vector2 newTarget;
+        Vector3 newTarget;
         if (passedThreshold)
         {
             newTarget = target.transform.position;
@@ -72,15 +75,16 @@ public class Enemy : MonoBehaviour
         else
         {
             // Do not modify "y" component
-            newTarget = new(target.transform.position.x, transform.position.y);
+            newTarget = new(target.transform.position.x, transform.position.y, target.transform.position.z);
         }
 
-        Vector2 direction = (newTarget - (Vector2)transform.position);
+        Vector3 direction = newTarget - transform.position;
         direction = direction.normalized;
         direction = defeated ? -direction : direction;
 
         float step = movementSpeed * Time.deltaTime;
-        transform.position += (Vector3)direction * step;
+        transform.position += direction * step;
+        transform.right += (transform.position - newTarget) * step;
     }
 
     public void Flee()
@@ -97,5 +101,8 @@ public class Enemy : MonoBehaviour
     {
         health -= amount;
         healthBar?.UpdateHealthBar(health, maxHealth);
+
+        Vector3 knockback = Vector3.right * knockbackForce;
+        rb.AddForce(knockback, ForceMode2D.Impulse);
     }
 }
