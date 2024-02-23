@@ -120,7 +120,7 @@ public class UI_Manager : MonoBehaviour
         //SpawnEntries();
 
         //Invoke("DebugMethod", 10);
-        ToggleMainUi(false);
+        //ToggleMainUi(false);
     }
 
     // Update is called once per frame

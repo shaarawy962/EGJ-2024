@@ -742,9 +742,9 @@ MonoBehaviour:
   sentenceTimeGap: 2
   dialogueSentences:
   - 'Ever since you let that group of helpless animals into your farm, they have
-    been causing trouble, taking food from other farm animals and eventually rebelling
-    against you, lead by Zulum the pig he united them agaist you, brining together
-    farm animals and outside animals, they''re trying to get into your greenhouse
+    been causing trouble, taking food from other animals in the farm and eventually
+    rebelling against you, lead by Zulum the pig he united them against you, brining
+    together farm animals and outside animals, they''re trying to get into your greenhouse
     and eventually take over the whole farm. Luckily some animals stayed loyal and
     are fighting for the farm, your trusty hound Thar and the nimble cat Zara are
     still holding their ground. seems like no matter how much kindness you give,
@@ -755,7 +755,7 @@ MonoBehaviour:
   - 
   - '<color="red">Zulum: </color>'
   MainMapSceneName: MainMap
-  MainMapSceneBuildIndex: 2
+  MainMapSceneBuildIndex: 1
 --- !u!114 &1085111682
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -874,11 +874,11 @@ MonoBehaviour:
   m_fontSize: 36
   m_fontSizeBase: 36
   m_fontWeight: 400
-  m_enableAutoSizing: 1
+  m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 2
+  m_HorizontalAlignment: 1
   m_VerticalAlignment: 256
   m_textAlignment: 65535
   m_characterSpacing: 0

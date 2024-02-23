@@ -46,6 +46,7 @@ public class PlayableCharacter : MonoBehaviour
     [SerializeField]
     EnemyType enemySpeciality;
 
+    [SerializeField] private ParticleSystem dust;
 
     private void Awake()
     {
@@ -62,6 +63,7 @@ public class PlayableCharacter : MonoBehaviour
     {
         if (Vector3.Distance(transform.position, Target) <= Offset)
         {
+            dust.Stop();
             var res = FindEnemy();
             if (res.Length > 0)
             {
@@ -70,19 +72,16 @@ public class PlayableCharacter : MonoBehaviour
             }
             else
                 _state = States.Idle;
-            _animator.SetInteger("State", 0);
         }
         else
         {
             Movement(Target);
-            _animator.SetInteger("State", 1);
             _state = States.Run;
+            dust.Play();
         }
-        //_animator.SetInteger("state", (int)_state);
+        _animator.SetInteger("state", (int)_state);
     }
-
-   
-
+    
     internal void ChangeTarget(Vector3 target, float offset)
     {
         Target = target;
@@ -115,7 +114,6 @@ public class PlayableCharacter : MonoBehaviour
             {
                 if (!enemy1.Defeated)
                     enemy1.TakeDamage(100);
-                _animator.SetTrigger("Attack");
             }
         }
 
