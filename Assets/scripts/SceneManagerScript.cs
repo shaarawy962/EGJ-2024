@@ -24,6 +24,8 @@ public class SceneManagerScript : MonoBehaviour
     public void OpenScene(string SceneName)
     {
         SceneManager.LoadScene(SceneName);
+        if (Time.timeScale == 0.0f)
+            Time.timeScale = 1.0f;
     }
 
     public void OpenScene(int sceneIndex)

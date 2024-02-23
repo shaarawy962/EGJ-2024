@@ -247,13 +247,13 @@ MonoBehaviour:
         - m_Target: {fileID: 6920357113507136444}
           m_TargetAssemblyTypeName: SceneManagerScript, Assembly-CSharp
           m_MethodName: OpenScene
-          m_Mode: 3
+          m_Mode: 5
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
             m_IntArgument: 0
             m_FloatArgument: 0
-            m_StringArgument: 
+            m_StringArgument: MainMenu
             m_BoolArgument: 0
           m_CallState: 2
 --- !u!114 &6920357113507136444
@@ -346,7 +346,7 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 3874221041
+    rgba: 4293651441
   m_fontColor: {r: 0.9433962, g: 0.9211463, b: 0.9211463, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3

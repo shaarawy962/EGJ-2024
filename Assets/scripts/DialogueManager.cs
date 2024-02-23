@@ -106,7 +106,7 @@ public class DialogueManager : MonoBehaviour
         Debug.Log("End of dialogue");
         dialogueText.gameObject.SetActive(false);
         //nextButton.gameObject.SetActive(false);
-        if (SceneManager.GetActiveScene().buildIndex == 0) {
+        if (SceneManager.GetActiveScene().buildIndex == 0 || SceneManager.GetActiveScene().buildIndex == 2) {
             //SceneManager.LoadScene(MainMapSceneBuildIndex);
             SceneManager.LoadScene(MainMapSceneName);
         }
