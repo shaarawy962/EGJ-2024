@@ -13,6 +13,8 @@ public class CharacterManager : MonoBehaviour
     private HoundCharacter houndCharacter;
 
 
+    public Action<int> onCharacterSelected;
+
     [SerializeField] private LayerMask characterMask;
     [SerializeField] private LayerMask groundMask;
 
@@ -70,6 +72,7 @@ public class CharacterManager : MonoBehaviour
         if (charaterComp is null)
             return;
         selectedCharacter = charaterComp;
+        onCharacterSelected?.Invoke(1);
     }
     
 }

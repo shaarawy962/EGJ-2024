@@ -35,9 +35,9 @@ public class UI_Manager : MonoBehaviour
     public UI_Delegates.WaveIndexChanged onWaveIndexChanged;
     public UI_Delegates.WaveTimerStarted onWaveTimerStarted;
 
-    public bool isTimerOn;
-    public float WaveTimeRemaining;
-    public int WaveIndex;
+    private bool isTimerOn;
+    private float WaveTimeRemaining;
+    private int WaveIndex;
 
 
     private int CharacterTypes;
@@ -51,6 +51,7 @@ public class UI_Manager : MonoBehaviour
     public void SetWaveTimer(float TimeRemaining)
     {
         WaveTimeRemaining = TimeRemaining;
+        isTimerOn = true;
     }
 
     private void RefreshEntries()
@@ -80,7 +81,7 @@ public class UI_Manager : MonoBehaviour
         }
     }
 
-    void UpdateWaveIndex(int newIndex)
+    public void UpdateWaveIndex(int newIndex)
     {
         WaveCountText.text = "WAVE " + WaveIndex;
         if (WaveTimeline)
@@ -108,6 +109,7 @@ public class UI_Manager : MonoBehaviour
         {
             Debug.Log("TIME is UP!");
             isTimerOn = false;
+            HideTimerText();
         }
         DisplayTimerText(WaveTimeRemaining);
     }
@@ -115,9 +117,9 @@ public class UI_Manager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        SpawnEntries();
+        //SpawnEntries();
 
-        Invoke("DebugMethod", 10);
+        //Invoke("DebugMethod", 10);
         ToggleMainUi(false);
     }
 
@@ -128,14 +130,12 @@ public class UI_Manager : MonoBehaviour
         {
             UpdateTimer(Time.deltaTime);
         }
+        else
+        {
+            HideTimerText();
+        }
     }
 
-
-    public void FinishWave()
-    {
-
-    }
-    
     void DisplayTimerText(float TimeRemaining)
     {
         TimeRemaining += 1;
@@ -145,6 +145,11 @@ public class UI_Manager : MonoBehaviour
 
         WaveTimerText.text = "Time Remaining: " + string.Format("{0:00}:{1:00}", minutes, seconds);
 
+    }
+
+    private void HideTimerText()
+    {
+        WaveTimerText.text = "";
     }
 
     private void DebugMethod()

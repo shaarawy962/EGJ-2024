@@ -19,8 +19,8 @@ public class Wave_Manager : MonoBehaviour
     public ShadyTimer WaveTimer;
     public ShadyTimer IntervalTimer;
 
-    public UnityEvent WaveEnded;
-    public UnityEvent WaveStarted;
+    public UnityEvent<float> WaveEnded;
+    public UnityEvent<int> WaveStarted;
     public UnityEvent IntervalStarted;
 
     List<Enemy> SpawnedOnes = new List<Enemy>(10);
@@ -38,13 +38,13 @@ public class Wave_Manager : MonoBehaviour
 
         if (SpawnedOnes.Count == 0 && (CurrentWave is null || NextWaveIntervalIndex >= CurrentWave.Intervals.Length - 1))
         {
-            WaveEnded?.Invoke();
             if (Is_Waves_Runing)
                 if (LoadNextWave())
                 {
                     WaveTimer = new ShadyTimer(CurrentWave.WaveDelay, false);
                     WaveTimer.Event += StartWave;
                 }
+            WaveEnded?.Invoke(WaveTimer.Delay);
         }
 
     }
@@ -68,7 +68,7 @@ public class Wave_Manager : MonoBehaviour
     public void StartWave()
     {
         LoadNextInterval();
-        WaveStarted?.Invoke();
+        WaveStarted?.Invoke(CurrentWaveIndex + 1);
         StartInterval();
     }
 

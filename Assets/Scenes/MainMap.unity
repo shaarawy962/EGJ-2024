@@ -1144,20 +1144,26 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 8bd16c3d153f0a245a553a23d6f02ecb, type: 2}
   CurrentWave: {fileID: 0}
   CurrentWaveIndex: -1
-  CurrentWaveInterval:
-    Enemies:
-    - enemy: {fileID: 0}
-      count: 0
-  CurrentWaveIntervalIndex: -1
+  NextWaveInterval:
+    IntervalDelay: 0
+    Enemies: []
+  NextWaveIntervalIndex: -1
   SpawnDelay: 0.2
   SpawnPoints:
   - {fileID: 1152477317}
   - {fileID: 2069315951}
   - {fileID: 528092149}
   - {fileID: 491812531}
-  WaveDelay: {x: 8, y: 10}
-  WaveTimer: 5
-  IntervalTimer: 2
+  WaveEnded:
+    m_PersistentCalls:
+      m_Calls: []
+  WaveStarted:
+    m_PersistentCalls:
+      m_Calls: []
+  IntervalStarted:
+    m_PersistentCalls:
+      m_Calls: []
+  Is_Waves_Runing: 0
 --- !u!1 &822782069
 GameObject:
   m_ObjectHideFlags: 0
@@ -1329,7 +1335,7 @@ SpriteRenderer:
   m_Size: {x: 38.399998, y: 21.599998}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!4 &930417348
@@ -1589,6 +1595,8 @@ MonoBehaviour:
   dialogueHeaders:
   - 
   - '<color="red">Zulum: </color>'
+  MainMapSceneName: 
+  MainMapSceneBuildIndex: 0
 --- !u!114 &1178326611
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1685,9 +1693,6 @@ MonoBehaviour:
   CharacterEntry: {fileID: 6742325851556457069, guid: 316f828f4ce0aba46a51992257a2624b, type: 3}
   DummyCharacterCount: 2
   WaveTimeline: {fileID: 429432320}
-  isTimerOn: 1
-  WaveTimeRemaining: 500
-  WaveIndex: 1
 --- !u!1 &1318965735
 GameObject:
   m_ObjectHideFlags: 0
@@ -1870,7 +1875,7 @@ MonoBehaviour:
   uI_Manager: {fileID: 1202910151}
   wave_Manager: {fileID: 803342209}
   DialogueManager: {fileID: 1178326610}
-  characterManager: {fileID: 0}
+  characterManager: {fileID: 667915015}
 --- !u!1 &1854610059 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2491593811023384658, guid: 907e640631483e842aed3d48b87de70b, type: 3}

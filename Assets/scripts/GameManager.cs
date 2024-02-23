@@ -32,6 +32,9 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         DialogueManager.DialogueEnded += OnDialogueEnded;
+        wave_Manager.WaveEnded.AddListener(uI_Manager.SetWaveTimer);
+        wave_Manager.WaveStarted.AddListener(uI_Manager.UpdateWaveIndex);
+        characterManager.onCharacterSelected += uI_Manager.SetCharacterTypes;
     }
 
     // Update is called once per frame
