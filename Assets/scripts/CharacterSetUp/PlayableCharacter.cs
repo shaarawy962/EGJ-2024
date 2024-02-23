@@ -73,16 +73,15 @@ public class PlayableCharacter : MonoBehaviour
             else
                 _state = States.Idle;
 
-            _animator.SetInteger("State", 0);
+            _animator.SetInteger("state", 0);
         }
         else
         {
             Movement(Target);
             _state = States.Run;
-            _animator.SetInteger("State", 1);
             dust.Play();
         }
-        
+        _animator.SetInteger("state", (int)_state);
     }
     
     internal void ChangeTarget(Vector3 target, float offset)
@@ -145,8 +144,8 @@ public class PlayableCharacter : MonoBehaviour
         else if (target.x < transform.position.x)
             transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles.x, 180, transform.rotation.eulerAngles.z);
     }
-    private void OnDrawGizmosSelected()
-    {
-        Gizmos.DrawWireSphere(attackPoint.position, attackRange);
-    }
+    // private void OnDrawGizmosSelected()
+    // {
+    //     Gizmos.DrawWireSphere(attackPoint.position, attackRange);
+    // }
 }
