@@ -63,17 +63,15 @@ public class PlayableCharacter : MonoBehaviour
     {
         if (Vector3.Distance(transform.position, Target) <= Offset)
         {
-            dust.Stop();
+             dust.Stop();
             var res = FindEnemy();
             if (res.Length > 0)
             {
-                _state = States.Attack;
                 Attack();
             }
             else
                 _state = States.Idle;
-
-            _animator.SetInteger("state", 0);
+           // _animator.SetInteger("state", 0);
         }
         else
         {
@@ -116,8 +114,8 @@ public class PlayableCharacter : MonoBehaviour
             {
                 if (!enemy1.Defeated)
                 {
+                    _state = States.Attack;
                     enemy1.TakeDamage(100);
-                    _animator.SetTrigger("Attack");
                 }
             }
         }
