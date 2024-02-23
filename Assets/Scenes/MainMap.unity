@@ -625,6 +625,22 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.x
       value: -3.081421
       objectReference: {fileID: 0}
+    - target: {fileID: 5912659268814272255, guid: 907e640631483e842aed3d48b87de70b, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5912659268814272255, guid: 907e640631483e842aed3d48b87de70b, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5912659268814272255, guid: 907e640631483e842aed3d48b87de70b, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1202910149}
+    - target: {fileID: 5912659268814272255, guid: 907e640631483e842aed3d48b87de70b, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 6878007397135839026, guid: 907e640631483e842aed3d48b87de70b, type: 3}
       propertyPath: m_PresetInfoIsWorld
       value: 0
@@ -1559,6 +1575,17 @@ Transform:
   m_Father: {fileID: 354481729}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 135}
+--- !u!114 &1169133089 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5912659268814272255, guid: 907e640631483e842aed3d48b87de70b, type: 3}
+  m_PrefabInstance: {fileID: 429432319}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1178326607
 GameObject:
   m_ObjectHideFlags: 0
@@ -1681,7 +1708,7 @@ GameObject:
   - component: {fileID: 1202910151}
   m_Layer: 0
   m_Name: HudUI_Manager
-  m_TagString: Untagged
+  m_TagString: UI_Manager
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1720,6 +1747,8 @@ MonoBehaviour:
   CharacterEntry: {fileID: 6742325851556457069, guid: 316f828f4ce0aba46a51992257a2624b, type: 3}
   DummyCharacterCount: 2
   WaveTimeline: {fileID: 429432320}
+  PauseScreen: {fileID: 3160591305063909819, guid: bc3800484d5d2434ab22b6cb83635f4f, type: 3}
+  SettingsBtn: {fileID: 1169133089}
 --- !u!1 &1318965735
 GameObject:
   m_ObjectHideFlags: 0

@@ -27,8 +27,12 @@ public class UI_Manager : MonoBehaviour
     [SerializeField] private GameObject CharacterEntry;
     [SerializeField] private int DummyCharacterCount;
     [SerializeField] private PlayableDirector WaveTimeline;
+    [SerializeField] private GameObject PauseScreen;
+    [SerializeField] private Button SettingsBtn;
     private List<GameObject> HorizontalBoxCharacterEntries;
+    private GameObject spawnedPauseMenu;
 
+    private bool bIsGamePaused = false;
 
     public UI_Delegates.CharacterTypesChanged onCharacterTypesChanged;
     public UI_Delegates.WaveTimerEnded onWaveTimerEnded;
@@ -52,6 +56,28 @@ public class UI_Manager : MonoBehaviour
     {
         WaveTimeRemaining = TimeRemaining;
         isTimerOn = true;
+    }
+
+    public void ToggleGamePause()
+    {
+        if (bIsGamePaused)
+        {
+            bIsGamePaused = false;
+            Destroy(spawnedPauseMenu);
+            spawnedPauseMenu = null;
+            Time.timeScale = 1.0f;
+        }
+        else
+        {
+            bIsGamePaused = true;
+            if (mainUi)
+            {
+                spawnedPauseMenu = Instantiate(PauseScreen);
+                if (spawnedPauseMenu.GetComponent<PauseMenu>() != null )
+                    spawnedPauseMenu.GetComponent<PauseMenu>().uI_manager = this;
+            }
+            Time.timeScale = 0.0f;
+        }
     }
 
     private void RefreshEntries()
@@ -97,6 +123,7 @@ public class UI_Manager : MonoBehaviour
         onWaveTimerStarted = SetWaveTimer;
         HorizontalBoxCharacterEntries = new List<GameObject>();
         WaveCountText.text = "";
+        SettingsBtn.onClick.AddListener(ToggleGamePause);
     }
 
     void UpdateTimer(float DeltaTime)
@@ -118,6 +145,7 @@ public class UI_Manager : MonoBehaviour
     void Start()
     {
         //SpawnEntries();
+        spawnedPauseMenu = null;
 
         //Invoke("DebugMethod", 10);
         //ToggleMainUi(false);
@@ -133,6 +161,11 @@ public class UI_Manager : MonoBehaviour
         else
         {
             HideTimerText();
+        }
+
+        if (Input.GetKeyUp(KeyCode.Escape))
+        {
+            ToggleGamePause();
         }
     }
 

@@ -8,6 +8,7 @@ TagManager:
   - OptionsBtn
   - QuitBtn
   - Enemy
+  - UI_Manager
   layers:
   - Default
   - TransparentFX
