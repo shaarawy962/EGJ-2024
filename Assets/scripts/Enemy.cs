@@ -20,7 +20,7 @@ public class Enemy : MonoBehaviour
 
     private bool defeated = false;
     private bool passedThreshold = false;
-    private float health;
+    [SerializeField]private float health;
     private FloatingHealthBar healthBar;
     private Rigidbody2D rb;
 
